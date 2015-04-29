@@ -69,6 +69,7 @@ d <- log(degree+1)
 # First need to convert beds, rooms, and leader to factors
 hh$rooms <- factor(hh$rooms)
 hh$beds <- factor(hh$beds)
+hh$electricity <- factor(hh$electricity)
 hh$leader <- factor(hh$leader)
 
 # Now put all of the controls in a single data frame
@@ -78,6 +79,7 @@ controls <- data.frame(hh[,c(2:9)])
 controls$village <- factor(controls$village,levels=c(NA,levels(controls$village)), exclude=NULL)
 controls$religion <- factor(controls$religion,levels=c(NA,levels(controls$religion)), exclude=NULL)
 controls$roof <- factor(controls$roof,levels=c(NA,levels(controls$roof)), exclude=NULL)
+controls$rooms <- factor(controls$rooms,levels=c(NA,levels(controls$rooms)), exclude=NULL)
 controls$beds <- factor(controls$beds,levels=c(NA,levels(controls$beds)), exclude=NULL)
 controls$electricity <- factor(controls$electricity,levels=c(NA,levels(controls$electricity)), exclude=NULL)
 controls$ownership <- factor(controls$ownership,levels=c(NA,levels(controls$ownership)), exclude=NULL)
