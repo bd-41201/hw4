@@ -102,7 +102,7 @@ plot(dhat,d,bty="n",pch=21,bg=8)
 
 # There does not graphically appear to be a strong relationship. But check R^2
 cor(drop(dhat),d)^2
-# ~> [1] 0.08478302
+# ~> [1] 0.08573867
 # R^2 is low which is good for our sake as the controls do not help predict the treatment effect
 
 ## Q3 - Re run with dhat estimator effect to find casual effect
