@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1430325487136.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "EF11BA3B",
+    "lastKnownWriteTime" : 21392300099829876,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "edges",
+        "contentUrl" : "content?title=edges&file=4fba6685b5e74e7d9ca0d49db8272e18.htm",
+        "displayedObservations" : "1000",
+        "displayedVariables" : 2,
+        "totalObservations" : "80356",
+        "variables" : "2"
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}
