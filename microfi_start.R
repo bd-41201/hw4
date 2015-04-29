@@ -103,4 +103,45 @@ cor(drop(dhat),d)^2
 # ~> [1] 0.08478302
 # R^2 is low which is good for our sake as the controls do not help predict the treatment effect
 
+## Q3 - Re run with dhat estimator effect to find casual effect
+causal <- gamlr(cBind(d,dhat,controls.smm),y,free=2,family="binomial")
+# coef(causal)["d",]
+# ~> [1] 0.1409793
+# exp(coef(causal)["d",])
+# ~> [1] 1.151401
+# Interpreting gamma.hat we would say that a 1% increase in connectedness increases the odds
+# of having a microloan by 15%. This is a non-trivial impact and appears to confirm the thesis
+# that connectivity is structurally connected with the propensity to get a microfinance loan.
 
+## Q4 - Compute the gamma.hat for a naive lasso
+naive <- gamlr(cBind(d,controls.smm),y,family="binomial")
+# coef(naive)["d",]
+# ~> [1] 0.1413462
+# exp(coef(naive)["d",])
+# ~> [1] 1.151823
+# So the naive regression estimates nearly the exact same impact of connectedness. This is an
+# interesting result but perhaps shouldn't be unexpected because we found that the controls
+# are not a good predictor of d (R^2 ~= .08).
+
+## Q5 - Bootstrap the estimator from Q3 and describe the uncertainty
+n <- nrow(controls.smm)
+
+## Bootstrapping our lasso causal estimator is easy
+gamb <- c() # empty gamma
+for(b in 1:20){
+  ## create a matrix of resampled indices
+  ib <- sample(1:n, n, replace=TRUE)
+  ## create the resampled data
+  controls.b <- controls.smm[ib,]
+  db <- d[ib]
+  yb <- y[ib]
+  ## run the treatment regression
+  treatb <- gamlr(controls.b,db,lambda.min.ratio=1e-3)
+  dhatb <- predict(treatb, controls.b, type="response")
+
+  fitb <- gamlr(cBind(db,dhatb,controls.b),yb,free=2,family="binomial")
+  gamb <- c(gamb,coef(fitb)["db",])
+  print(b)
+}
+## not very exciting though: all zeros
+summary(gamb)
