@@ -108,19 +108,19 @@ cor(drop(dhat),d)^2
 ## Q3 - Re run with dhat estimator effect to find casual effect
 causal <- gamlr(cBind(d,dhat,controls.smm),y,free=2,family="binomial")
 # coef(causal)["d",]
-# ~> [1] 0.1409793
+# ~> [1] 0.1526997
 # exp(coef(causal)["d",])
-# ~> [1] 1.151401
+# ~> [1] 1.164975
 # Interpreting gamma.hat we would say that a 1% increase in connectedness increases the odds
-# of having a microloan by 15%. This is a non-trivial impact and appears to confirm the thesis
+# of having a microloan by 16.5%. This is a non-trivial impact and appears to confirm the thesis
 # that connectivity is structurally connected with the propensity to get a microfinance loan.
 
 ## Q4 - Compute the gamma.hat for a naive lasso
 naive <- gamlr(cBind(d,controls.smm),y,family="binomial")
 # coef(naive)["d",]
-# ~> [1] 0.1413462
+# ~> [1] 0.1413112
 # exp(coef(naive)["d",])
-# ~> [1] 1.151823
+# ~> [1] 1.151783
 # So the naive regression estimates nearly the exact same impact of connectedness. This is an
 # interesting result but perhaps shouldn't be unexpected because we found that the controls
 # are not a good predictor of d (R^2 ~= .08).
