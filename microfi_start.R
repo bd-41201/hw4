@@ -130,7 +130,7 @@ n <- nrow(controls.smm)
 
 ## Bootstrapping our lasso causal estimator is easy
 gamb <- c() # empty gamma
-for(b in 1:20){
+for(b in 1:100){
   ## create a matrix of resampled indices
   ib <- sample(1:n, n, replace=TRUE)
   ## create the resampled data
@@ -145,5 +145,5 @@ for(b in 1:20){
   gamb <- c(gamb,coef(fitb)["db",])
   print(b)
 }
-## not very exciting though: all zeros
+
 summary(gamb)
