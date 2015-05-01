@@ -147,3 +147,9 @@ for(b in 1:100){
 }
 
 summary(gamb)
+# Print the bootstrap distribution and overlay the gamma from double lasso
+# png('bootstrap_hist.png')
+hist(gamb,main="Histogram of Bootstrap Distribution",xlab="Gamma")
+abline(v=coef(causal)["d",],col=2)
+legend("topright",fill=c(1,"red"),bty="n",legend=c("bootstrap (x rand)","Double Lasso Gamma (0.1527)"),cex=.8)
+# dev.off()
